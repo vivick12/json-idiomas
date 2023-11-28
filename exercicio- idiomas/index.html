@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        h1 {
+            font-family: 'star';
+            color: rgb(209, 200, 25);
+            text-align: center;
+        }
+
+        body {
+            background-color: rgb(2, 34, 92);
+        }
+
+        .conteudo {
+            padding: 1em;
+            border: 1px solid rgb(69, 100, 213);
+            margin-bottom: 1em;
+            background-color: rgb(2, 34, 92);
+            border-radius: 5px;
+            width: 48%; /* Reduzi a largura para acomodar dois blocos lado a lado */
+            color: rgb(245, 249, 222);
+            box-sizing: border-box;
+            display: flex; /* Permite que os blocos fiquem ao lado um do outro */
+            align-items: center;
+            margin-left: 380px;
+        }
+
+        #idiomas {
+            margin-top: 1em;
+            text-align: center; /* Alinhe os botões à direita */
+            display: flex; /* Use display flex para alinhar os botões lado a lado */
+           margin-left: 450px;
+            flex-wrap: wrap; /* Permite que os botões quebrem para a linha seguinte se não houver espaço suficiente */
+        }
+
+        #idiomas button {
+            margin-right: 10px; /* Adicione um espaçamento entre os botões */
+            margin-bottom: 10px; /* Adicione um espaçamento abaixo dos botões */
+            padding: 10px; /* Adicione um preenchimento nos botões */
+            display: flex;
+            align-items: center;
+            width: 130px;
+            border-radius: 5px;
+            font-family: 'inter';
+            background-color: rgba(39, 77, 132, 0.756);
+            color: aliceblue;
+        }
+
+        #idiomas button img {
+            margin-right: 5px; /* Adicione um espaçamento entre a imagem e o texto */
+            width: 40px;
+            align-items: center;
+        }
+
+        @font-face {
+            font-family: 'star';
+            src: url(Starborn.otf);
+        }
+
+        @font-face {
+            font-family: 'inter';
+            src: url(LTInternet-Regular.ttf);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Looklaguage</h1>
+    <div class="conteudo" id="paragrafo1"></div>
+    <div class="conteudo" id="paragrafo2"></div>
+    <div class="conteudo" id="paragrafo3"></div>
+
+    <div id="idiomas">
+        <button onclick="Escolher('en')">
+            <img src="download (3).png" alt="Inglês"> Inglês
+        </button>
+        <button onclick="Escolher('ptbr')">
+            <img src="download (1).png" alt="Português"> Português
+        </button>
+        <button onclick="Escolher('es')">
+            <img src="5.png" alt="Espanhol"> Espanhol
+        </button>
+        <button onclick="Escolher('fr')">
+            <img src="download.png" alt="Francês"> Francês
+        </button>
+    </div>
+
+    <script>
+        function Escolher(idioma) {
+            fetch(`texto.${idioma}.json`)
+                .then(resposta => resposta.json())
+                .then(texto => {
+                    document.getElementById('paragrafo1').innerText = texto.paragrafo1;
+                    document.getElementById('paragrafo2').innerText = texto.paragrafo2;
+                    document.getElementById('paragrafo3').innerText = texto.paragrafo3;
+                })
+                .catch(error => console.error('Erro buscando textos:', error));
+        }
+    </script>
+</body>
+</html>
